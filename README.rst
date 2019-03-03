@@ -36,8 +36,8 @@ Database of names used for identification
 
 Supports 12 formats of Russian full names writing style
 
-| format | example | description |
-| --- | --- | --- |
+| Format | Example        | Description  |
+| ------ |:--------------:| ------------:|
 | f | Ольга | only first name |
 | s | Петров | only surname |
 | Fs | О. Сидорова | first letter of first name and full surname |
@@ -50,7 +50,7 @@ Supports 12 formats of Russian full names writing style
 | sFM | Николаенко С.П. | full surname and first letters of first and middle names |
 | sfM | Петракова Зинаида М.| full surname, first name and first letter of middle name |
 | sfm | Казаков Ринат Артурович | full name as surname, first name and middle name |
-| fms | Светлана Архиповна Волкова| full name as first name, middle name and surname |
+| fms | Светлана Архиповна Волкова | full name as first name, middle name and surname |
 
 
 
