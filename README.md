@@ -11,6 +11,15 @@
 Documentation is built automatically and can be found on
 https://russiannames.readthedocs.org/en/latest/
 
+## Installation
+
+To install Python library use `pip install russiannames` via pip or `python setup.py install` 
+
+To use database you need MongoDB instance. 
+Unpack db_data_bson.zip file from https://github.com/datacoon/russiannames/blob/master/data/bson/db_dump_bson.zip
+
+and use `mongorestore` command to restore `names` database with 3 collections: names, surnames and midnames
+
 ## Features
 
 Database of names used for identification
