@@ -34,6 +34,15 @@ Database of names used for identification
 * 32134 first names
 * 48274 midnames
 
+
+| Tables        | Are           | Cool |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      |   $12 |
+| zebra stripes | are neat      |    $1 |
+
+
+
 Supports 12 formats of Russian full names writing style
 
 | Format | Example        | Description  |
