@@ -1,5 +1,5 @@
 ====================================================
-qddate -- quick and dirty python parser dates what could be found during HTML scraping
+russiannames -- names parser, processing and gender identification for Russian names
 ====================================================
 
 .. image:: https://img.shields.io/travis/datacoon/russiannames/master.svg?style=flat-square
@@ -35,20 +35,21 @@ Database of names used for identification
 
 Supports 12 formats of Russian full names writing style
 
-format | example | description
-f | Ольга | only first name
-s | Петров | only surname
-Fs | О. Сидорова | first letter of first name and full surname
-sF | Николаев С. | full surname and first letter of surname
-sf | Абрамов Семен | full surname and full first name
-fs | Соня Камиуллина | full first name and full surname
-fm | Иван Петрович | full first name and full middlename
-SFM | М.Д.М. | first letters of surname, first name, middlename 
-FMs | А.Н. Егорова | first letters of first and middle name and full furname
-sFM | Николаенко С.П. | full surname and first letters of first and middle names
-sfM | Петракова Зинаида М.| full surname, first name and first letter of middle name
-sfm | Казаков Ринат Артурович | full name as surname, first name and middle name
-fms | Светлана Архиповна Волкова| full name as first name, middle name and surname
+|format | example | description|
+|---|---|---|
+|f | Ольга | only first name|
+|s | Петров | only surname|
+|Fs | О. Сидорова | first letter of first name and full surname|
+|sF | Николаев С. | full surname and first letter of surname|
+|sf | Абрамов Семен | full surname and full first name|
+|fs | Соня Камиуллина | full first name and full surname|
+|fm | Иван Петрович | full first name and full middlename|
+|SFM | М.Д.М. | first letters of surname, first name, middlename |
+|FMs | А.Н. Егорова | first letters of first and middle name and full furname|
+|sFM | Николаенко С.П. | full surname and first letters of first and middle names|
+|sfM | Петракова Зинаида М.| full surname, first name and first letter of middle name|
+|sfm | Казаков Ринат Артурович | full name as surname, first name and middle name|
+|fms | Светлана Архиповна Волкова| full name as first name, middle name and surname|
 
 
 
@@ -76,7 +77,10 @@ and it's `parse` function.
 
 
 Examples
----------------
+============
+
+
+## Parse name and identify gender
 
     >>> from russiannames.parser import NamesParser
     >>> parser = NamesParser()
@@ -85,14 +89,19 @@ Examples
     >>> parser.parse('Петрова C.Я.')
     {'format': 'sFM', 'sn': 'Петрова', 'fn_s': 'C', 'mn_s': 'Я', 'gender': 'f', 'text': 'Петрова C.Я.', 'parsed': True}
     
-
-
+## Ethnic identification (experimental)
+    >>> from russiannames.parser import NamesParser
+    >>> parser = NamesParser()
+    >>> parser.classify('Нигматуллин', 'Ринат', 'Ахметович')
+{'ethnics': ['tur'], 'gender': 'm'}
+    >>> parser.classify('Алексеева', 'Ольга', 'Ивановна')
+ {'ethnics': ['slav'], 'gender': 'f'}
 
 
 Dependencies
 ============
 
-`qddate` relies on following libraries in some ways:
+`russiannames` relies on following libraries in some ways:
 
   * pymongo_ is a module for MongoDB.
 .. _pymongo: https://pypi.python.org/pypi/pymongo
