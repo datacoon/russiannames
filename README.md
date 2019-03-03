@@ -9,7 +9,7 @@
 ## Documentation
 
 Documentation is built automatically and can be found on
-https://russiannames.readthedocs.org/en/latest/>
+https://russiannames.readthedocs.org/en/latest/
 
 ## Features
 
