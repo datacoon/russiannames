@@ -6,7 +6,7 @@ import re
 from .consts import *
 
 def use_rule(name, rule):
-    """"""
+    """Use one of rules and apply it to identification"""
     result = name
     parts = rule.split()
     for part in parts:

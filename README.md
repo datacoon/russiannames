@@ -1,8 +1,8 @@
 
-# russiannames -- names parser, processing and gender identification for Russian names
+# Russian Names
 
 
-`russiannames` is a Python 3 lib to parse Russian names, surnames and midnames, identify person gender by fullname and how name is written. It uses MongoDB as backend to speed-up name parsing
+`russiannames` is a Python 3 library dedicated to parse Russian names, surnames and midnames, identify person gender by fullname and how name is written. It uses MongoDB as backend to speed-up name parsing.
 
 
 
@@ -15,9 +15,15 @@ https://russiannames.readthedocs.org/en/latest/>
 
 Database of names used for identification
 
-* 375449 surnames
-* 32134 first names
-* 48274 midnames
+* 375449 surnames - collection: surnames
+* 32134 first names - collection: names
+* 48274 midnames - collection: midnames
+
+Detailed database statistics by gender and collection
+collection|males|females|universal or unidentified
+names|19297|8278|1196|
+midnames|30114|16143|0
+surnames|124662|111534|38827
 
 
 Supports 12 formats of Russian full names writing style
@@ -39,11 +45,27 @@ Supports 12 formats of Russian full names writing style
 | fms | Светлана Архиповна Волкова | full name as first name, middle name and surname |
 
 
+Supports names with following ethnics identification
+
+9 ethnic types in names, surnames and middle names supported
+
+| key  | name (en) | name (rus)
+| ---- | --------- | ----------
+| arab | Arabic     | Арабское
+| arm  | Armenian     | Армянское
+| geor | Georgian     | Грузинское
+| germ | German     | Немецкие
+| greek | Greek    | Греческие
+| jew  | Jew      | Еврейские
+| polsk | Polish    | Польские
+| slav | Slavic (Russian) | Славянские
+| tur  | Turkic | Тюркские (тюркоязычные)
 
 
 ## Limitations
 
-* very rare names, surnames or middlenames could be not parsed
+* very rare names, surnames or middlenames could be not parsed 
+* ethnic identification is still on early stage
 
 
 ## Speed optimization
@@ -53,8 +75,9 @@ Supports 12 formats of Russian full names writing style
 
 ## Usage and Examples
 
-
 ### Parse name and identify gender
+
+Parses names and returns: format, surname, first name, middle name, parsed (True/False) and gender 
 
     >>> from russiannames.parser import NamesParser
     >>> parser = NamesParser()
@@ -62,14 +85,25 @@ Supports 12 formats of Russian full names writing style
     {'format': 'sfm', 'sn': 'Нигматуллин', 'fn': 'Ринат', 'mn': 'Ахметович', 'gender': 'm', 'text': 'Нигматуллин Ринат Ахметович', 'parsed': True}
     >>> parser.parse('Петрова C.Я.')
     {'format': 'sFM', 'sn': 'Петрова', 'fn_s': 'C', 'mn_s': 'Я', 'gender': 'f', 'text': 'Петрова C.Я.', 'parsed': True}
+
+Gender field could have one of following values:
+
+* m: Male
+* f: Female
+* u: Unknown / unidentified
+* -: Impossible to identify
     
 ### Ethnic identification (experimental)
+Parses surname, first name and middle name and tries to identify person ethic affilation of the person
+
     >>> from russiannames.parser import NamesParser
     >>> parser = NamesParser()
     >>> parser.classify('Нигматуллин', 'Ринат', 'Ахметович')
-{'ethnics': ['tur'], 'gender': 'm'}
+    {'ethnics': ['tur'], 'gender': 'm'}
     >>> parser.classify('Алексеева', 'Ольга', 'Ивановна')
- {'ethnics': ['slav'], 'gender': 'f'}
+    {'ethnics': ['slav'], 'gender': 'f'}
+
+
 
 
 ## Supported languages
@@ -79,8 +113,7 @@ Supports 12 formats of Russian full names writing style
 
 ## Requirements
 * pymongo
-* click https://github.com/pallets/click
-
+* click
 
 
 ## Acknowledgements
