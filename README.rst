@@ -48,7 +48,7 @@ Supports 12 formats of Russian full names writing style
 | SFM | М.Д.М. | first letters of surname, first name, middlename |
 | FMs | А.Н. Егорова | first letters of first and middle name and full furname |
 | sFM | Николаенко С.П. | full surname and first letters of first and middle names |
-| sfM | Петракова Зинаида М.| full surname, first name and first letter of middle name |
+| sfM | Петракова Зинаида М. | full surname, first name and first letter of middle name |
 | sfm | Казаков Ринат Артурович | full name as surname, first name and middle name |
 | fms | Светлана Архиповна Волкова | full name as first name, middle name and surname |
 
