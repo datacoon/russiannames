@@ -37,7 +37,7 @@ Database of names used for identification
 Supports 12 formats of Russian full names writing style
 
 | Format | Example        | Description  |
-| ------ |:--------------:| ------------:|
+| ------ | -------------- | ------------ |
 | f | Ольга | only first name |
 | s | Петров | only surname |
 | Fs | О. Сидорова | first letter of first name and full surname |
