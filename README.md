@@ -20,10 +20,12 @@ Database of names used for identification
 * 48274 midnames - collection: midnames
 
 Detailed database statistics by gender and collection
-collection|males|females|universal or unidentified
-names|19297|8278|1196|
-midnames|30114|16143|0
-surnames|124662|111534|38827
+
+| collection|males|females|universal or unidentified |
+| --- | ---| ---| --- |
+| names | 19297 | 8278 | 1196 |
+| midnames | 30114 | 16143 | 0 |
+| surnames | 124662 | 111534 | 38827 |
 
 
 Supports 12 formats of Russian full names writing style
