@@ -1,4 +1,3 @@
-
 # russiannames -- names parser, processing and gender identification for Russian names
 
 
@@ -6,19 +5,19 @@
 
 
 
-## Documentation
+# Documentation
 
 Documentation is built automatically and can be found on
-https://russiannames.readthedocs.org/en/latest/>
+`Read the Docs <https://russiannames.readthedocs.org/en/latest/>`_.
 
-## Features
+
+# Features
 
 Database of names used for identification
 
 * 375449 surnames
 * 32134 first names
 * 48274 midnames
-
 
 Supports 12 formats of Russian full names writing style
 
@@ -41,20 +40,33 @@ Supports 12 formats of Russian full names writing style
 
 
 
-## Limitations
+Limitations
+========
 
 * very rare names, surnames or middlenames could be not parsed
 
 
-## Speed optimization
+Speed optimization
+========
 
 * preconfigured and preindexed MongoDb collections used
 
 
-## Usage and Examples
+Usage
+=====
+
+The easiest way is to use the `russiannames.parser.NameParser <#russiannames.parser.NameParser>`_ class,
+and it's `parse` function.
+
+.. automodule:: russiannames.parser
+   :members: NameParser
 
 
-### Parse name and identify gender
+Examples
+============
+
+
+## Parse name and identify gender
 
     >>> from russiannames.parser import NamesParser
     >>> parser = NamesParser()
@@ -63,7 +75,7 @@ Supports 12 formats of Russian full names writing style
     >>> parser.parse('Петрова C.Я.')
     {'format': 'sFM', 'sn': 'Петрова', 'fn_s': 'C', 'mn_s': 'Я', 'gender': 'f', 'text': 'Петрова C.Я.', 'parsed': True}
     
-### Ethnic identification (experimental)
+## Ethnic identification (experimental)
     >>> from russiannames.parser import NamesParser
     >>> parser = NamesParser()
     >>> parser.classify('Нигматуллин', 'Ринат', 'Ахметович')
@@ -72,15 +84,27 @@ Supports 12 formats of Russian full names writing style
  {'ethnics': ['slav'], 'gender': 'f'}
 
 
-## Supported languages
+Dependencies
+============
+
+`russiannames` relies on following libraries in some ways:
+
+  * pymongo_ is a module for MongoDB.
+.. _pymongo: https://pypi.python.org/pypi/pymongo
+
+
+Supported languages
+===================
 * Russian
 
 
 
-## Requirements
+Requirements
+============
 * pymongo
 * click https://github.com/pallets/click
 
 
 
-## Acknowledgements
+Acknowledgements
+================
