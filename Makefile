@@ -37,21 +37,21 @@ coverage:
 	coverage run --source russiannames setup.py test
 	coverage report -m
 	coverage html
-	python -m webbrowser htmlcov/index.html
+	python3 -m webbrowser htmlcov/index.html
 
 docs:
-	rm -f docs/docx2csv.rst
+	rm -f docs/russiannames.rst
 	rm -f docs/modules.rst
 	sphinx-apidoc -o docs/ russiannames
 	$(MAKE) -C docs clean
 	$(MAKE) -C docs html
-	python -m webbrowser docs/_build/html/index.html
+	python3 -m webbrowser docs/_build/html/index.html
 
 release: clean
-	python setup.py sdist upload
-	python setup.py bdist_wheel upload
+	python3 setup.py sdist upload
+	python3 setup.py bdist_wheel upload
 
 dist: clean
-	python setup.py sdist
-	python setup.py bdist_wheel
+	python3 setup.py sdist
+	python3 setup.py bdist_wheel
 	ls -l dist
