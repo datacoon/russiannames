@@ -105,7 +105,7 @@ Gender field could have one of following values:
 * -: Impossible to identify
     
 ### Ethnic identification (experimental)
-Parses surname, first name and middle name and tries to identify person ethic affilation of the person
+Parses surname, first name and middle name and tries to identify person ethic affiliation of the person
 
     >>> from russiannames.parser import NamesParser
     >>> parser = NamesParser()
