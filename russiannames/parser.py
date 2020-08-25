@@ -1,6 +1,7 @@
 # -*- coding: UTF-8 -*-
 
 import sys, os.path
+import logging
 from pymongo import MongoClient
 import re
 from .consts import *
@@ -184,7 +185,9 @@ class NamesParser:
         genders = {}
         ethnics = []
         the_m = mcoll.find_one({'text' : mn})
+        logging.debug('Last name %s, first name %s, middle name %s' % (sn, fn, mn))
         if the_m:
+            logging.debug('Middle name found in db %s' % (str(the_m)))
             if 'gender' in the_m:
                 v = genders.get(the_m['gender'], 0)
                 genders[the_m['gender']] = v + 1
@@ -193,6 +196,7 @@ class NamesParser:
                     if e not in ethnics: ethnics.append(e)
         else:
             res = guess_by_rules(mn, MIDDLENAME_POSTRULES)
+            logging.debug('Rules result on middle name %s' % (str(res)))
             if res:
                 if res[1] == GENDER_MALE:
                     g = 'm'
@@ -235,12 +239,13 @@ class NamesParser:
             for r in res[1]:
                 if r not in ethnics: ethnics.append(r)
         alist = list(genders.items())
+        logging.debug('Genders list %s' % (genders))
         thedict = sorted(alist, key=lambda x: x[1], reverse=True)
         result['ethnics'] = ethnics
-        if len(thedict) == 1:
-            result['gender'] = thedict[0][0]
-        elif len(thedict) > 1 and thedict[0][0] == 'u':
+        if len(thedict) > 1 and thedict[0][0] == 'u':
             result['gender'] = thedict[1][0]
+        elif len(thedict) > 0:
+            result['gender'] = thedict[0][0]
         return result
 
 
