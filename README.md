@@ -115,16 +115,13 @@ Parses surname, first name and middle name and tries to identify person ethic af
     {'ethnics': ['slav'], 'gender': 'f'}
 
 
-
-
 ## Supported languages
 * Russian
-
 
 
 ## Requirements
 * pymongo
 * click
 
-
-## Acknowledgements
+## Related projects
+- Slavic names https://github.com/wb-08/SlavicNames - same data shipped as SQLite database
