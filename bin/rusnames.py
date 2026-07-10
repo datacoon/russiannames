@@ -1,10 +1,8 @@
+#!/usr/bin/env python3
 # -*- coding: UTF-8 -*-
+"""Thin wrapper kept for backwards compatibility; use the ``rusnames`` command."""
 
-import sys
-from russiannames.parser import NamesParser
-from pprint import pprint
+from russiannames.cli import main
 
-if __name__ == '__main__':
-    import locale
-    np = NamesParser()
-    pprint(np.parse(sys.argv[1]))
+if __name__ == "__main__":
+    raise SystemExit(main())

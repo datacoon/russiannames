@@ -1,0 +1,64 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "russiannames"
+version = "2.0.0"
+description = "Russian names parser, gender identification and processing tools"
+readme = "README.md"
+license = { text = "BSD-3-Clause" }
+authors = [{ name = "Ivan Begtin", email = "ivan@begtin.tech" }]
+requires-python = ">=3.9"
+keywords = ["russian", "names", "surnames", "gender"]
+dependencies = [
+    "duckdb>=0.9",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: BSD License",
+    "Natural Language :: Russian",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: Implementation :: CPython",
+]
+
+[project.urls]
+Homepage = "https://github.com/datacoon/russiannames"
+Documentation = "https://github.com/datacoon/russiannames#readme"
+Repository = "https://github.com/datacoon/russiannames"
+
+[project.optional-dependencies]
+test = ["pytest>=7"]
+dev = [
+    "pytest>=7",
+    "ruff>=0.4",
+    "coverage>=7",
+    "build>=1",
+    "twine>=4",
+]
+
+[project.scripts]
+rusnames = "russiannames.cli:main"
+
+[tool.setuptools]
+packages = ["russiannames"]
+
+[tool.setuptools.package-data]
+russiannames = ["data/*.parquet", "py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+
+[tool.ruff.lint]
+# pyflakes (F), pycodestyle errors (E), warnings (W), isort (I)
+select = ["E", "F", "W", "I"]

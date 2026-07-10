@@ -1,4 +1,4 @@
-.PHONY: clean-pyc clean-build docs clean
+.PHONY: clean-pyc clean-build clean lint test coverage sync-data release dist
 SHELL := /bin/bash
 
 help:
@@ -6,9 +6,10 @@ help:
 	@echo "clean-build - remove build artifacts"
 	@echo "clean-pyc - remove Python file artifacts"
 	@echo "clean-test - remove test and coverage artifacts"
-	@echo "lint - check style with flake8"
+	@echo "lint - check style with ruff"
+	@echo "test - run the test suite with pytest"
 	@echo "coverage - check code coverage quickly with the default Python"
-	@echo "docs - generate Sphinx HTML documentation, including API docs"
+	@echo "sync-data - regenerate bundled datasets from data/parquet"
 	@echo "release - package and upload a release"
 	@echo "dist - package"
 
@@ -31,27 +32,23 @@ clean-test:
 	rm -fr htmlcov/
 
 lint:
-	flake8 russiannames tests --config=./flake8
+	ruff check russiannames tests
+
+test:
+	pytest
 
 coverage:
-	coverage run --source russiannames setup.py test
+	coverage run --source russiannames -m pytest
 	coverage report -m
 	coverage html
 	python3 -m webbrowser htmlcov/index.html
 
-docs:
-	rm -f docs/russiannames.rst
-	rm -f docs/modules.rst
-	sphinx-apidoc -o docs/ russiannames
-	$(MAKE) -C docs clean
-	$(MAKE) -C docs html
-	python3 -m webbrowser docs/_build/html/index.html
+sync-data:
+	cp data/parquet/names.parquet data/parquet/surnames.parquet data/parquet/midnames.parquet russiannames/data/
 
-release: clean
-	python3 setup.py sdist upload
-	python3 setup.py bdist_wheel upload
+release: dist
+	python3 -m twine upload dist/*
 
-dist: clean
-	python3 setup.py sdist
-	python3 setup.py bdist_wheel
+dist: clean sync-data
+	python3 -m build
 	ls -l dist

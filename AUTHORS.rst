@@ -1,9 +1,0 @@
-=======
-Credits
-=======
-
-
-Committers
-----------
-
-* Ivan Begtin

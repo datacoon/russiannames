@@ -1,39 +1,44 @@
 # Russian Names
 
 
-`russiannames` is a Python 3 library dedicated to parse Russian names, surnames and midnames, identify person gender by fullname and how name is written. It uses MongoDB as backend to speed-up name parsing.
+`russiannames` is a Python 3 library dedicated to parse Russian names, surnames and midnames, identify person gender by fullname and how name is written. It uses an embedded [DuckDB](https://duckdb.org/) engine over bundled Parquet datasets to speed-up name parsing — no database server required.
 
 
 
 ## Documentation
 
-Documentation is built automatically and can be found on
-https://russiannames.readthedocs.org/en/latest/
+Usage and API documentation lives in this README (see the sections below).
 
 ## Installation
 
-To install Python library use `pip install russiannames` via pip or `python setup.py install` 
+Install the library with pip:
 
-To use database you need MongoDB instance. 
-Unpack db_data_bson.zip file from [https://github.com/datacoon/russiannames/blob/master/data/bson/db_dump_bson.zip](https://github.com/datacoon/russiannames/blob/master/data/bson/russiannames_db_bson.zip)
+    pip install russiannames
 
-and use `mongorestore` command to restore `names` database with 3 collections: names, surnames and midnames
+The reference datasets (Parquet files) are bundled with the package, so no
+external database, download, or restore step is needed. `NamesParser()` works out
+of the box.
+
+To use your own datasets, point the library at a directory containing
+`names.parquet`, `surnames.parquet` and `midnames.parquet` via either the
+`NamesParser(data_dir=...)` argument or the `RUSSIANNAMES_DATA_DIR` environment
+variable.
 
 ## Features
 
-Database of names used for identification
+Bundled Parquet datasets used for identification
 
-* 375449 surnames - collection: surnames
-* 32134 first names - collection: names
-* 48274 midnames - collection: midnames
+* 375449 surnames - dataset: surnames.parquet
+* 32134 first names - dataset: names.parquet
+* 48274 midnames - dataset: midnames.parquet
 
 Detailed database statistics by gender and collection
 
 | collection| total | males|females|universal or unidentified |
 | --- | --- | --- | --- | --- |
-| names | 32134 | 19297 | 8278 | 1196 |
-| midnames | 48274 | 30114 | 16143 | 0 |
-| surnames | 375274 | 124662 | 111534 | 38827 |
+| names | 32134 | 19297 | 8278 | 4559 |
+| midnames | 48274 | 30114 | 16143 | 2017 |
+| surnames | 375449 | 124662 | 111534 | 139253 |
 
 
 Supports 12 formats of Russian full names writing style
@@ -80,7 +85,8 @@ Supports names with following ethnics identification
 
 ## Speed optimization
 
-* preconfigured and preindexed MongoDb collections used
+* datasets are loaded into an in-memory DuckDB database and indexed on the
+  lookup key (`text`) for fast exact-match queries
 
 
 ## Usage and Examples
@@ -102,7 +108,11 @@ Gender field could have one of following values:
 * f: Female
 * u: Unknown / unidentified
 * -: Impossible to identify
-    
+
+### Command line
+
+    rusnames "Нигматуллин Ринат Ахметович"
+
 ### Ethnic identification (experimental)
 Parses surname, first name and middle name and tries to identify person ethic affiliation of the person
 
@@ -119,8 +129,8 @@ Parses surname, first name and middle name and tries to identify person ethic af
 
 
 ## Requirements
-* pymongo
-* click
+* Python 3.9+
+* duckdb
 
 ## Related projects
 - Slavic names https://github.com/wb-08/SlavicNames - same data shipped as SQLite database

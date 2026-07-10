@@ -87,3 +87,10 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+# Legacy / intermediate ETL artifacts (superseded by data/parquet as source of truth)
+data/bson/
+data/jsonl/*.zst
+data/jsonl/norm.py
+scripts/cross-check.zip
+scripts/differences.*
